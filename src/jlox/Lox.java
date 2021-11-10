@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.List;
 
 public class Lox {
@@ -55,7 +56,7 @@ public class Lox {
         // stop if syntax error
         if (hadError) return;
 
-        interpreter.interpret(statements);
+        interpreter.interpret(statements.stream().filter(s -> (s != null)).toList());
     }
 
     static void error(Token token, String message) {
