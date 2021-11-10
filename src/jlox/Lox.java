@@ -56,7 +56,7 @@ public class Lox {
         // stop if syntax error
         if (hadError) return;
 
-        interpreter.interpret(statements.stream().filter(s -> (s != null)).toList());
+        interpreter.interpret(statements);
     }
 
     static void error(Token token, String message) {

@@ -64,6 +64,7 @@ public class Parser {
         if (!check(SEMICOLON)) {
             condition = expression();
         }
+        consume(SEMICOLON, "Expect ';' after loop condition.");
 
         Expr increment = null;
         if (!check(RIGHT_PAREN)) {
@@ -77,9 +78,7 @@ public class Parser {
             body = new Stmt.Block(
                     Arrays.asList(
                             body,
-                            new Stmt.Expression(increment)
-                    )
-            );
+                            new Stmt.Expression(increment)));
         }
 
         if (condition == null) condition = new Expr.Literal(true);
@@ -88,7 +87,7 @@ public class Parser {
         if (initializer != null) {
             body = new Stmt.Block(Arrays.asList(initializer, body));
         }
-
+        
         return body;
     }
     private Stmt ifStatement() {
